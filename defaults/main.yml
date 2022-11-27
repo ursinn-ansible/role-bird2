@@ -2,5 +2,6 @@
 app_bgp_bird2_enabled: false
 
 app_bgp_bird2_repo_url: https://bird.network.cz/debian/
-app_bgp_bird2_apt_repository: "deb [arch=amd64] {{ app_bgp_bird2_repo_url }} {{ ansible_distribution_release }} main"
+app_bgp_bird2_distribution_release: buster # {{ ansible_distribution_release }}
+app_bgp_bird2_apt_repository: "deb [arch=amd64] {{ app_bgp_bird2_repo_url }} {{ app_bgp_bird2_distribution_release }} main"
 app_bgp_bird2_apt_gpg_key: "{{ app_bgp_bird2_repo_url }}/apt.key"
