@@ -1,10 +1,8 @@
 ---
 - name: Add Bird2 apt key
-  ansible.builtin.get_url:
-    url: "{{ app_bgp_bird2_apt_gpg_key }}"
-    dest: /etc/apt/trusted.gpg.d/bird2.asc
-    mode: '0644'
-    force: true
+  ansible.builtin.apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: B188E2B695BD4743
 
 - name: Add Bird2 repository
   apt_repository:
