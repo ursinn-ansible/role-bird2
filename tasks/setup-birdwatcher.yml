@@ -1,0 +1,35 @@
+---
+- name: Ensure alicelg/birdwatcher image is pulled
+  community.docker.docker_image:
+    name: docker.io/alicelg/birdwatcher
+    source: pull
+    force_source: yes
+  register: pulled
+
+- name: Remove birdwatcher container
+  community.docker.docker_container:
+    name: birdwatcher
+    state: absent
+  when: pulled.changed
+
+- name: Get infos on birdwatcher container
+  community.docker.docker_container_info:
+    name: birdwatcher
+  register: result
+
+- name: Create birdwatcher container
+  community.docker.docker_container:
+    image: docker.io/alicelg/birdwatcher
+    mounts:
+     - source: /var/run/bird/bird.ctl
+       target: /usr/local/var/run/bird.ctl
+       type: bind
+    name: birdwatcher
+    published_ports:
+     - 29186:29186
+    restart_policy: unless-stopped
+    state: started
+  when:
+    pulled.changed
+    or
+    result.exists == false
