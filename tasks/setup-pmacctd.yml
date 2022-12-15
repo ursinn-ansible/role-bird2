@@ -6,7 +6,7 @@
 
 - name: Copy pmacctd.conf file
   ansible.builtin.template:
-    src: pmacctd.conf
+    src: pmacctd.conf.j2
     dest: /etc/pmacct/pmacctd.conf
     owner: root
     group: root
