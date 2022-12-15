@@ -5,7 +5,7 @@
     state: latest
 
 - name: Copy pmacctd.conf file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: pmacctd.conf
     dest: /etc/pmacct/pmacctd.conf
     owner: root
@@ -13,7 +13,7 @@
     force: true
     mode: 0644
 
-- name: Copy interfaces.map file
+- name: Create interfaces.map file
   ansible.builtin.blockinfile:
     dest: /etc/pmacct/interfaces.map
     create: true
