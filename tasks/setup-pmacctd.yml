@@ -48,3 +48,10 @@
     group: root
     mode: 0644
     block: "bgp_ip={{ app_bgp_bird2_pmacctd_bgp_ip }}     ip=0.0.0.0/0"
+
+- name: Ensure pmacctd is started and enabled at boot
+  ansible.builtin.service:
+    name: pmacctd
+    state: started
+    enabled: true
+  ignore_errors: "{{ ansible_check_mode }}"
