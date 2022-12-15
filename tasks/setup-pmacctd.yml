@@ -1,0 +1,50 @@
+---
+- name: Install pmacct
+  ansible.builtin.package:
+    name: "pmacct"
+    state: latest
+
+- name: Copy pmacctd.conf file
+  ansible.builtin.copy:
+    src: pmacctd.conf
+    dest: /etc/pmacct/pmacctd.conf
+    owner: root
+    group: root
+    force: true
+    mode: 0644
+
+- name: Copy interfaces.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/interfaces.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "{{ app_bgp_bird2_pmacctd_interfaces }}"
+
+- name: Create pretag.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/pretag.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "set_label={{ inventory_hostname }}"
+
+- name: Create networks.lst file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/networks.lst
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "{{ app_bgp_bird2_pmacctd_networks }}"
+
+- name: Create peering_agent.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/peering_agent.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "bgp_ip={{ app_bgp_bird2_pmacctd_bgp_ip }}     ip=0.0.0.0/0"

@@ -1,20 +1,4 @@
 ---
-- name: Add Bird2 apt key
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: B188E2B695BD4743
-
-- name: Add Bird2 repository
-  apt_repository:
-    repo: "{{ app_bgp_bird2_apt_repository }}"
-    state: present
-    update_cache: true
-
-- name: Install Bird2
-  ansible.builtin.package:
-    name: "bird2"
-    state: latest
-
 - name: Install Bird prometheus exporter
   ansible.builtin.package:
     name: "prometheus-bird-exporter"
