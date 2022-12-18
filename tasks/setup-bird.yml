@@ -1,16 +1,27 @@
 ---
-- name: Add Bird2 apt key
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: B188E2B695BD4743
+# - name: Add Bird2 apt key
+#   ansible.builtin.apt_key:
+#     keyserver: keyserver.ubuntu.com
+#     id: B188E2B695BD4743
 
-- name: Add Bird2 repository
-  apt_repository:
-    repo: "{{ app_bgp_bird2_apt_repository }}"
-    state: present
-    update_cache: true
+# - name: Add Bird2 repository
+#   apt_repository:
+#     repo: "{{ app_bgp_bird2_apt_repository }}"
+#     state: present
+#     update_cache: true
+
+# - name: Install Bird2
+#   ansible.builtin.package:
+#     name: "bird2"
+#     state: latest
+
+# Temporary solution as no deb package available
+# https://gitlab.nic.cz/labs/bird/-/pipelines?page=1&scope=all&ref=v2.0.11
+- name: Copy package
+  ansible.builtin.copy:
+    src: "bird2_2.0.11.1670801292.1e47b9f2-cznic.1_amd64.deb"
+    dest: "~/bird2_2.0.11.1670801292.1e47b9f2-cznic.1_amd64.deb"
 
 - name: Install Bird2
-  ansible.builtin.package:
-    name: "bird2"
-    state: latest
+  ansible.builtin.apt:
+    deb: ~/bird2_2.0.11.1670801292.1e47b9f2-cznic.1_amd64.deb
