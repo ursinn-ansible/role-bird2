@@ -10,4 +10,5 @@ app_bgp_bird2_pmacctd_enabled: false
 app_bgp_bird2_pmacctd_bgp_ip: 127.0.0.1
 app_bgp_bird2_pmacctd_networks: ""
 app_bgp_bird2_pmacctd_interfaces: ""
-app_bgp_bird2_pmacctd_kafka: ""
+app_bgp_bird2_pmacctd_kafka_broker_host: ""
+app_bgp_bird2_pmacctd_kafka_topic: pmacct.acct

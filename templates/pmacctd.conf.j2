@@ -9,7 +9,7 @@ pmacctd_net: longest
 networks_file: /etc/pmacct/networks.lst
 networks_file_no_lpm: true
 sampling_rate: 1
-aggregate: src_host, dst_host, src_port, dst_port, src_as, dst_as, label, proto
+aggregate: src_host, dst_host, peer_src_ip, peer_dst_ip, in_iface, out_iface, src_port, dst_port, src_as, dst_as, peer_src_as, peer_dst_as, label, proto
 !
 bgp_daemon: true
 bgp_daemon_ip: 127.0.0.2
@@ -19,7 +19,8 @@ bgp_agent_map: /etc/pmacct/peering_agent.map
 !
 plugins: kafka
 kafka_output: json
-kafka_broker_host: {{ app_bgp_bird2_pmacctd_kafka }}
+kafka_broker_host: {{ app_bgp_bird2_pmacctd_kafka_broker_host }}
 kafka_refresh_time: 5
 kafka_history: 5m
 kafka_history_roundoff: m
+kafka_topic: {{ app_bgp_bird2_pmacctd_kafka_topic }}
