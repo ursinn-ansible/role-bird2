@@ -25,3 +25,13 @@
 - name: Install Bird2
   ansible.builtin.apt:
     deb: ~/bird2_2.0.11.1670801292.1e47b9f2-cznic.1_amd64.deb
+
+- name: Create bird.log file
+  ansible.builtin.file:
+    dest: /var/log/bird.log
+    state: touch
+    owner: bird
+    group: bird
+    mode: 0644
+    modification_time: preserve
+    access_time: preserve
