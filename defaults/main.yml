@@ -6,9 +6,13 @@ app_bgp_bird2_distribution_release: buster # {{ ansible_distribution_release }}
 app_bgp_bird2_apt_repository: "deb [arch=amd64] {{ app_bgp_bird2_repo_url }} {{ app_bgp_bird2_distribution_release }} main"
 app_bgp_bird2_apt_gpg_key: "{{ app_bgp_bird2_repo_url }}/apt.key"
 
+app_bgp_bird2_exporter_enabled: false
+
 app_bgp_bird2_pmacctd_enabled: false
 app_bgp_bird2_pmacctd_bgp_ip: 127.0.0.1
 app_bgp_bird2_pmacctd_networks: ""
 app_bgp_bird2_pmacctd_interfaces: ""
 app_bgp_bird2_pmacctd_kafka_broker_host: ""
 app_bgp_bird2_pmacctd_kafka_topic: pmacct.acct
+
+app_bgp_bird2_pathvector_enabled: false

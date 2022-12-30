@@ -1,0 +1,28 @@
+---
+ - name: Add pathvector apt key
+   ansible.builtin.get_url:
+     url: https://repo.pathvector.io/pgp.asc
+     dest: /usr/share/keyrings/pathvector.asc
+     mode: 0644
+
+ - name: Add pathvector repository
+   apt_repository:
+     repo: "deb [signed-by=/usr/share/keyrings/pathvector.asc] https://repo.pathvector.io/apt/ stable main"
+     state: present
+     update_cache: true
+
+ - name: Install pathvector
+   ansible.builtin.package:
+     name: "pathvector"
+     state: latest
+
+ - name: Install bgpq4
+   ansible.builtin.package:
+     name: "bgpq4"
+     state: latest
+
+ - name: Add cronjob for daily pathvector regenerate
+   ansible.builtin.cron:
+     name: "pathvector regenerate"
+     special_time: daily
+     job: "pathvector generate"
