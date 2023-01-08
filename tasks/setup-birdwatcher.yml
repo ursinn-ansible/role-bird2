@@ -1,7 +1,7 @@
 ---
-- name: Ensure alicelg/birdwatcher image is pulled
+- name: Ensure as202427/birdwatcher image is pulled
   community.docker.docker_image:
-    name: docker.io/alicelg/birdwatcher
+    name: docker.io/as202427/birdwatcher
     source: pull
     force_source: yes
   register: pulled
@@ -19,7 +19,7 @@
 
 - name: Create birdwatcher container
   community.docker.docker_container:
-    image: docker.io/alicelg/birdwatcher
+    image: docker.io/as202427/birdwatcher
     mounts:
      - source: /var/run/bird/bird.ctl
        target: /usr/local/var/run/bird.ctl
