@@ -5,8 +5,8 @@
 - include_tasks: "{{ role_path }}/tasks/setup-bird-exporter.yml"
   when: "app_bgp_bird2_enabled|bool and app_bgp_bird2_exporter_enabled|bool"
 
-#- include_tasks: "{{ role_path }}/tasks/setup-birdwatcher.yml"
-#  when: "app_bgp_bird2_enabled|bool"
+- include_tasks: "{{ role_path }}/tasks/setup-birdwatcher.yml"
+  when: "app_bgp_bird2_enabled|bool and app_bgp_bird2_birdwatcher_enabled|bool"
 
 - include_tasks: "{{ role_path }}/tasks/setup-pmacctd.yml"
   when: "app_bgp_bird2_enabled|bool and app_bgp_bird2_pmacctd_enabled|bool"
