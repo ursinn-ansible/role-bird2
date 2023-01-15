@@ -21,12 +21,12 @@
   community.docker.docker_container:
     image: docker.io/as202427/birdwatcher
     mounts:
-     - source: /var/run/bird/bird.ctl
-       target: /usr/local/var/run/bird.ctl
-       type: bind
+      - source: /run/bird/bird.ctl
+        target: /usr/local/var/run/bird.ctl
+        type: bind
     name: birdwatcher
     published_ports:
-     - 29186:29186
+      - 29184:29184
     restart_policy: unless-stopped
     state: started
   when:
