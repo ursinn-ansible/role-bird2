@@ -1,4 +1,15 @@
 ---
+- name: Create config directory
+  ansible.builtin.file:
+    path: /opt/app-birdwatcher/config
+    state: directory
+    mode: 0755
+
+- name: Copy birdwatcher config
+  ansible.builtin.copy:
+    src: "etc/birdwatcher/birdwatcher.conf"
+    dest: "/opt/app-birdwatcher/config/birdwatcher.conf"
+
 - name: Ensure as202427/birdwatcher image is pulled
   community.docker.docker_image:
     name: docker.io/as202427/birdwatcher
@@ -22,7 +33,10 @@
     image: docker.io/as202427/birdwatcher
     mounts:
       - source: /run/bird/bird.ctl
-        target: /usr/local/var/run/bird.ctl
+        target: /run/bird/bird.ctl
+        type: bind
+      - source: /opt/app-birdwatcher/config
+        target: /etc/birdwatcher
         type: bind
     name: birdwatcher
     published_ports:
