@@ -19,12 +19,12 @@
 # https://gitlab.nic.cz/labs/bird/-/pipelines?page=1&scope=all&ref=v2.0.12
 - name: Copy package
   ansible.builtin.copy:
-    src: "bird2_2.0.12.1674466690.5437104a-cznic.1_amd64"
-    dest: "~/bird2_2.0.12.1674466690.5437104a-cznic.1_amd64"
+    src: "bird2_2.0.12.1674466690.5437104a-cznic.1_amd64.deb"
+    dest: "~/bird2_2.0.12.1674466690.5437104a-cznic.1_amd64.deb"
 
 - name: Install Bird2
   ansible.builtin.apt:
-    deb: ~/bird2_2.0.12.1674466690.5437104a-cznic.1_amd64
+    deb: ~/bird2_2.0.12.1674466690.5437104a-cznic.1_amd64.deb
 
 - name: Create bird.log file
   ansible.builtin.file:
