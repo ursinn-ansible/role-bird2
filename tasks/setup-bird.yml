@@ -20,7 +20,7 @@
 - name: Copy package
   ansible.builtin.copy:
     src: "bird2_2.0.12.1674466690.5437104a-cznic.1_amd64"
-    dest: "~/bird2_2.0.12.1674466690.5437104a-cznic.1_amd64
+    dest: "~/bird2_2.0.12.1674466690.5437104a-cznic.1_amd64"
 
 - name: Install Bird2
   ansible.builtin.apt:
