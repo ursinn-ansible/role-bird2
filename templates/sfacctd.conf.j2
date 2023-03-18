@@ -1,0 +1,32 @@
+! sfacctd configuration
+!
+!
+!
+daemonize: true
+pidfile: /var/run/sfacctd.pid
+syslog: daemon
+!
+pcap_interfaces_map: /etc/pmacct/interfaces.map
+pre_tag_map: /etc/pmacct/pretag.map
+pmacctd_as: longest
+pmacctd_net: longest
+networks_file: /etc/pmacct/networks.lst
+networks_file_no_lpm: false
+sampling_rate: 1
+aggregate: src_host, dst_host, src_as, dst_as, peer_src_ip, peer_dst_ip, peer_src_as, peer_dst_as, label
+!
+bgp_daemon: true
+bgp_daemon_ip: 127.0.0.3
+bgp_daemon_port: 180
+bgp_daemon_max_peers: 1
+bgp_agent_map: /etc/pmacct/peering_agent.map
+bgp_peer_src_as_map: /etc/pmacct/peers.map
+bgp_peer_src_as_type: map
+!
+plugins: kafka
+kafka_output: json
+kafka_broker_host: {{ app_bgp_bird2_pmacct_kafka_broker_host }}
+kafka_topic: sfacct.acct
+kafka_refresh_time: 5
+kafka_history: 5m
+kafka_history_roundoff: m

@@ -1,0 +1,84 @@
+---
+- name: Install pmacct
+  ansible.builtin.package:
+    name: "pmacct"
+    state: latest
+
+- name: Copy pmacctd.conf file
+  ansible.builtin.template:
+    src: pmacctd.conf.j2
+    dest: /etc/pmacct/pmacctd.conf
+    owner: root
+    group: root
+    force: true
+    mode: 0644
+
+- name: Copy sfacctd.conf file
+  ansible.builtin.template:
+    src: sfacctd.conf.j2
+    dest: /etc/pmacct/sfacctd.conf
+    owner: root
+    group: root
+    force: true
+    mode: 0644
+
+- name: Create interfaces.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/interfaces.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "{{ app_bgp_bird2_pmacct_interfaces }}"
+
+- name: Create pretag.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/pretag.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "set_label={{ inventory_hostname }}"
+
+- name: Create networks.lst file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/networks.lst
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "{{ app_bgp_bird2_pmacct_networks }}"
+
+- name: Create peering_agent.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/peering_agent.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: "bgp_ip={{ app_bgp_bird2_pmacct_bgp_ip }}   ip=0.0.0.0/0"
+
+- name: Create peers.map file
+  ansible.builtin.blockinfile:
+    dest: /etc/pmacct/peers.map
+    create: true
+    owner: root
+    group: root
+    mode: 0644
+    block: |
+     id=bgp     ip=0.0.0.0/0
+     id=999999  ip=0.0.0.0/0
+
+- name: Ensure pmacctd is started and enabled at boot
+  ansible.builtin.service:
+    name: pmacctd
+    state: started
+    enabled: true
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Ensure sfacctd is started and enabled at boot
+  ansible.builtin.service:
+    name: sfacctd
+    state: stopped
+    enabled: false
+  ignore_errors: "{{ ansible_check_mode }}"
