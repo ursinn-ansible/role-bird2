@@ -9,11 +9,3 @@ app_bgp_bird2_apt_gpg_key: "{{ app_bgp_bird2_repo_url }}/apt.key"
 app_bgp_bird2_exporter_enabled: false
 
 app_bgp_bird2_birdwatcher_enabled: false
-
-app_bgp_bird2_pmacct_enabled: false
-app_bgp_bird2_pmacct_bgp_ip: 127.0.0.1
-app_bgp_bird2_pmacct_networks: ""
-app_bgp_bird2_pmacct_interfaces: ""
-app_bgp_bird2_pmacct_kafka_broker_host: ""
-
-app_bgp_bird2_pathvector_enabled: false
