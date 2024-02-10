@@ -1,8 +1,8 @@
 ---
-app_bgp_bird2_repo_url: https://bird.network.cz/debian/
-app_bgp_bird2_distribution_release: buster # {{ ansible_distribution_release }}
-app_bgp_bird2_apt_repository: "deb [arch=amd64] {{ app_bgp_bird2_repo_url }} {{ app_bgp_bird2_distribution_release }} main"
-app_bgp_bird2_apt_gpg_key: "{{ app_bgp_bird2_repo_url }}/apt.key"
+app_bgp_bird2_service_state: started
+app_bgp_bird2_service_enabled: true
+
+app_bgp_bird2_file: bird2_2.14.1696695898.0e1fbaa5-cznic.1_amd64.deb
 
 app_bgp_bird2_exporter_enabled: false
 
