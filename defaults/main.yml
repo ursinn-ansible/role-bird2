@@ -1,14 +1,18 @@
 ---
-# Install File (Temporary)
 app_bird2_deb_file: bird2_2.14.1696695898.0e1fbaa5-cznic.1_amd64.deb
-# Service
+
+# Service options.
 app_bird2_service_state: started
 app_bird2_service_enabled: true
+
 # Log File
 app_bird2_log_file: /var/log/bird.log
+
 # SNMP extension
 app_bird2_snmp_enabled: false
+
 # Prometheus Exporter
 app_bird2_exporter_enabled: false
+
 # Birdwatcher
 app_bird2_birdwatcher_enabled: false
