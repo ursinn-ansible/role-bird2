@@ -3,16 +3,17 @@
 # https://gitlab.nic.cz/labs/bird/-/pipelines?page=1&scope=all&ref=v2.14
 - name: Copy package
   ansible.builtin.copy:
-    src: "{{ app_bgp_bird2_file }}"
-    dest: "~/{{ app_bgp_bird2_file }}"
+    src: "{{ app_bird2_deb_file }}"
+    dest: "~/{{ app_bird2_deb_file }}"
 
 - name: Install Bird2
   ansible.builtin.apt:
-    deb: "~/{{ app_bgp_bird2_file }}"
+    deb: "~/{{ app_bird2_deb_file }}"
 
-- name: Create bird.log file
+# Log
+- name: Create bird log file
   ansible.builtin.file:
-    dest: /var/log/bird.log
+    dest: "{{ app_bird2_log_file }}"
     state: touch
     owner: bird
     group: bird
@@ -20,11 +21,12 @@
     modification_time: preserve
     access_time: preserve
 
+# Service
 - name: Ensure bird is started and enabled at boot
   ansible.builtin.service:
     name: bird
-    state: "{{ app_bgp_bird2_service_state }}"
-    enabled: "{{ app_bgp_bird2_service_enabled }}"
+    state: "{{ app_bird2_service_state }}"
+    enabled: "{{ app_bird2_service_enabled }}"
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Allow the Debian-snmp user to sudo /usr/sbin/birdc
@@ -33,10 +35,12 @@
     state: present
     user: Debian-snmp
     commands: /usr/sbin/birdc
-  when: "app_bgp_bird2_snmp_enabled|bool"
+  when: "app_bird2_snmp_enabled|bool"
 
+# Prometheus Exporter
 - include_tasks: "{{ role_path }}/tasks/setup-bird-exporter.yml"
-  when: "app_bgp_bird2_exporter_enabled|bool"
+  when: "app_bird2_exporter_enabled|bool"
 
+# Birdwatcher
 - include_tasks: "{{ role_path }}/tasks/setup-birdwatcher.yml"
-  when: "app_bgp_bird2_birdwatcher_enabled|bool"
+  when: "app_bird2_birdwatcher_enabled|bool"
