@@ -6,7 +6,7 @@
 ## Options
 
 | Option | Default Value |
-| --- | --- | --- |
+| ---- | ---- |
 | app_bird2_deb_file | bird2_2.14.1696695898.0e1fbaa5-cznic.1_amd64.deb |
 | app_bird2_service_state | true |
 | app_bird2_service_enabled | true |
