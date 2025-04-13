@@ -1,18 +1,22 @@
 ---
-app_bird2_deb_file: bird2_2.14.1696695898.0e1fbaa5-cznic.1_amd64.deb
+bird2_apt_repository: "deb [signed-by=/usr/share/keyrings/cznic-labs-pkg.gpg] https://pkg.labs.nic.cz/bird2 {{ ansible_distribution_release }} main"
+bird2_apt_gpg_key: "https://pkg.labs.nic.cz/gpg"
 
 # Service options.
-app_bird2_service_state: started
-app_bird2_service_enabled: true
+bird2_service_state: started
+bird2_service_enabled: true
 
 # Log File
-app_bird2_log_file: /var/log/bird.log
+bird2_log_file: /var/log/bird.log
 
 # SNMP extension
-app_bird2_snmp_enabled: false
+bird2_snmp_enabled: false
 
 # Prometheus Exporter
-app_bird2_exporter_enabled: false
+bird2_exporter_enabled: false
 
 # Birdwatcher
-app_bird2_birdwatcher_enabled: false
+bird2_birdwatcher_enabled: false
+
+
+
